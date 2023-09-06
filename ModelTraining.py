@@ -57,3 +57,22 @@ from roboflow import Roboflow
 rf = Roboflow(api_key="eZgbkOIRk8d8gFLJR0mU")
 project = rf.workspace("personal-ai").project("klop")
 dataset = project.version(1915).download("yolov5")
+
+from google.colab import drive
+drive.mount('/content/drive')
+
+# ran 36min nothing
+%cd /content/drive/MyDrive/yolov5
+!pip install wandb
+#%cd yolov5
+%pwd
+# may need to play around with the paths to 
+# 1. train.py (should be located within the yolov5 folder)
+# 2. data.yaml
+# 3. the weights file (EX: yolov5s.pt)
+
+#!-- resume
+# !python train.py --img 416 --batch 64 --epochs 150 --data TRAFFIC-ACCIDENT-DETECTION-FINAL-DATASET-4/data.yaml --weights models/yolov5s.pt --cache
+!python train.py --img 416 --batch 100 --epochs 350 --data klop-1915/data.yaml --weights models/yolov5s.pt --cache
+
+
